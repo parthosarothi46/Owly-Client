@@ -13,7 +13,7 @@ import Lottie from "lottie-react";
 
 export default function Newsletter() {
   return (
-    <div className="container mx-auto pb-12">
+    <div className="container mx-auto py-10 px-4 xl:px-0">
       <div className="flex flex-col md:flex-row justify-around gap-5">
         <div>
           <Lottie animationData={news}></Lottie>

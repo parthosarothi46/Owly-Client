@@ -60,7 +60,7 @@ function FindTutors() {
   if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10 px-4 xl:px-0">
       <h1 className="text-2xl font-bold text-center mb-6">Find Tutors</h1>
       <div className="mb-6">
         <Input
@@ -98,7 +98,7 @@ function FindTutors() {
       {/* Pagination Controls */}
       {totalPages > 1 && (
         <div className="mt-6 flex justify-center">
-          <div className="flex gap-2">
+          <div className="flex flex-wrap md:flex-nowrap gap-2">
             {Array.from({ length: totalPages }, (_, index) => (
               <Button
                 key={index}

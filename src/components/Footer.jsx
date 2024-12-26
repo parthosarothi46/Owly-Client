@@ -3,8 +3,8 @@ import { Input } from "@/components/ui/input";
 
 export default function Footer() {
   return (
-    <footer className="bg-black dark:bg-white py-10">
-      <div className="container mx-auto px-4">
+    <footer className="bg-black dark:bg-white py-10 px-4 xl:px-0">
+      <div className="container mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           {/* Brand Section */}
           <div>

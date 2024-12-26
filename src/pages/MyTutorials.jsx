@@ -60,7 +60,7 @@ function MyTutorials() {
   }
 
   return (
-    <div className="container mx-auto py-10 px-4 sm:px-6 lg:px-8">
+    <div className="container mx-auto py-10 px-4 xl:px-0">
       <h1 className="text-3xl font-bold text-center mb-8">My Tutorials</h1>
       <div className="overflow-x-auto shadow-md rounded-lg">
         <table className="min-w-full bg-white">

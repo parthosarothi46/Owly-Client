@@ -22,7 +22,7 @@ const Stats = () => {
   }, []);
 
   return (
-    <div className="py-8">
+    <div className="py-10 px-4 xl:px-0">
       <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Tutors Count */}
         <div className="flex flex-col items-center justify-center rounded-lg border shadow-md p-6">

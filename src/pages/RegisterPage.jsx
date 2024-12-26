@@ -49,7 +49,7 @@ function RegisterPage() {
   };
 
   return (
-    <div className="my-10">
+    <div className="my-10 px-4 xl:px-0">
       <div className="flex flex-col md:flex-row justify-around items-center">
         <div>
           <Card className="w-full max-w-md shadow-lg">

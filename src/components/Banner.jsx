@@ -37,7 +37,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="relative container mx-auto my-8 overflow-hidden rounded-lg shadow-lg group">
+    <div className="relative container mx-auto my-10 overflow-hidden rounded-lg shadow-lg group">
       {/* Carousel Image */}
       <div className="relative">
         <img

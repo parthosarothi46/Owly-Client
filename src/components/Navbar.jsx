@@ -30,7 +30,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="shadow-md py-4 px-6">
+    <nav className="shadow-md py-4 px-0 md:px-4 lg:px-4 xl:px-0">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo/Website Name */}
         <div className="text-2xl font-bold bg-white h-11 w-44 rounded-xl">
@@ -40,7 +40,7 @@ function Navbar() {
         </div>
 
         {/* Mobile and Tablet View */}
-        <div className="flex items-center space-x-4 lg:hidden">
+        <div className="flex items-center space-x-2 lg:hidden">
           {/* Theme Toggle Button */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

@@ -40,7 +40,7 @@ function LoginPage() {
   };
 
   return (
-    <div className="container mx-auto my-10">
+    <div className="container mx-auto my-10 px-4 xl:px-0">
       <div className="flex flex-col-reverse md:flex-row justify-around items-center">
         <div>
           <Lottie animationData={loginImage}></Lottie>

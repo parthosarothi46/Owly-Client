@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 
 function AboutUs() {
   return (
-    <div className="py-12">
+    <div className="py-10 px-4 xl:px-0">
       <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           {/* Image Section */}
