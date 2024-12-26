@@ -28,13 +28,11 @@ function MyBookedTutors() {
 
   // Handle review increment
   const handleReview = async (tutorialId) => {
-    console.log("Tutorial ID sent to backend:", tutorialId);
     try {
       // Increment review count on the backend
       const patchResponse = await axios.patch(
         `http://localhost:5000/tutorials/review/${tutorialId}`
       );
-      console.log(patchResponse.data.message);
 
       // Fetch the updated tutorial details
       const getResponse = await axios.get(
