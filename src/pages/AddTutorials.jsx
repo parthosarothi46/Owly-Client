@@ -54,7 +54,7 @@ function AddTutorials() {
 
   return (
     <div className="container mx-auto py-10">
-      <h1 className="text-2xl font-bold text-center mb-6">Add Tutorial</h1>
+      <h1 className="text-3xl font-bold text-center mb-8">Add Tutorial</h1>
       {error && (
         <div className="text-center mb-4">
           <p className="text-red-500 font-semibold">{error}</p>
@@ -65,8 +65,8 @@ function AddTutorials() {
         className="max-w-lg mx-auto p-6 border border-gray-200 rounded-md shadow-sm space-y-4"
       >
         <div>
-          <label htmlFor="name" className="block text-gray-700 mb-2">
-            Name
+          <label htmlFor="name" className="block mb-2">
+            Name :
           </label>
           <Input
             id="name"
@@ -74,13 +74,12 @@ function AddTutorials() {
             name="name"
             value={formData.name}
             readOnly
-            className="bg-gray-100"
           />
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-gray-700 mb-2">
-            Email
+          <label htmlFor="email" className="block mb-2">
+            Email :
           </label>
           <Input
             id="email"
@@ -88,13 +87,12 @@ function AddTutorials() {
             name="email"
             value={formData.email}
             readOnly
-            className="bg-gray-100"
           />
         </div>
 
         <div>
-          <label htmlFor="image" className="block text-gray-700 mb-2">
-            Image URL
+          <label htmlFor="image" className="block mb-2">
+            Image URL :
           </label>
           <Input
             id="image"
@@ -108,8 +106,8 @@ function AddTutorials() {
         </div>
 
         <div>
-          <label htmlFor="language" className="block text-gray-700 mb-2">
-            Language
+          <label htmlFor="language" className="block mb-2">
+            Language :
           </label>
           <Input
             id="language"
@@ -123,8 +121,8 @@ function AddTutorials() {
         </div>
 
         <div>
-          <label htmlFor="price" className="block text-gray-700 mb-2">
-            Price ($)
+          <label htmlFor="price" className="block mb-2">
+            Price : ($)
           </label>
           <Input
             id="price"
@@ -139,7 +137,7 @@ function AddTutorials() {
         </div>
 
         <div>
-          <label htmlFor="description" className="block text-gray-700 mb-2">
+          <label htmlFor="description" className="block mb-2">
             Description
           </label>
           <Textarea
@@ -153,7 +151,7 @@ function AddTutorials() {
         </div>
 
         <div>
-          <label htmlFor="review" className="block text-gray-700 mb-2">
+          <label htmlFor="review" className="block mb-2">
             Review
           </label>
           <Input
@@ -162,12 +160,11 @@ function AddTutorials() {
             name="review"
             value={formData.review}
             readOnly
-            className="bg-gray-100"
           />
         </div>
 
         <Button type="submit" disabled={loading} className="w-full">
-          {loading ? "Adding..." : "Add Tutorial"}
+          {loading ? "Adding" : "Add Tutorial"}
         </Button>
       </form>
     </div>
