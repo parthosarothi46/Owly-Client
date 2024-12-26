@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { Link, useNavigate } from "react-router";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Loader2 } from "lucide-react";
+import regiterImage from "../assets/register.json";
+import Lottie from "lottie-react";
 
 function RegisterPage() {
   const [name, setName] = useState("");
@@ -42,82 +49,90 @@ function RegisterPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
-      <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
-        <h1 className="text-3xl font-bold text-center text-blue-600 mb-6">
-          Create an Account
-        </h1>
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-        <form onSubmit={handleRegister} className="space-y-5">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Name
-            </label>
-            <input
-              type="text"
-              placeholder="Enter your name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
-            <input
-              type="password"
-              placeholder="Create a password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Photo URL (Optional)
-            </label>
-            <input
-              type="url"
-              placeholder="Add a profile picture URL"
-              value={photoURL}
-              onChange={(e) => setPhotoURL(e.target.value)}
-              className="block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
-          <button
-            type="submit"
-            className={`w-full py-2 rounded-md text-white font-semibold transition ${
-              loading
-                ? "bg-blue-300 cursor-not-allowed"
-                : "bg-blue-500 hover:bg-blue-600"
-            }`}
-            disabled={loading}
-          >
-            {loading ? "Registering..." : "Register"}
-          </button>
-        </form>
-        <p className="text-sm text-center mt-4 text-gray-700">
-          Already have an account?{" "}
-          <Link to="/login" className="text-blue-500 hover:underline">
-            Login here
-          </Link>
-        </p>
+    <div className="my-10">
+      <div className="flex flex-col md:flex-row justify-around items-center">
+        <div>
+          <Card className="w-full max-w-md shadow-lg">
+            <CardHeader>
+              <CardTitle className="text-center text-2xl font-bold">
+                Create an Account
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              {error && (
+                <Alert variant="destructive" className="mb-4">
+                  <AlertTitle>Error</AlertTitle>
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
+              <form onSubmit={handleRegister} className="space-y-4">
+                <div>
+                  <Input
+                    type="text"
+                    placeholder="Enter your name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <Input
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <Input
+                    type="password"
+                    placeholder="Create a password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full"
+                    required
+                  />
+                </div>
+                <div>
+                  <Input
+                    type="url"
+                    placeholder="Add a profile picture URL (optional)"
+                    value={photoURL}
+                    onChange={(e) => setPhotoURL(e.target.value)}
+                    className="w-full"
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={loading}
+                  variant={loading ? "outline" : "default"}
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="animate-spin mr-2 h-4 w-4" />
+                      Registering
+                    </>
+                  ) : (
+                    "Register"
+                  )}
+                </Button>
+              </form>
+              <p className="text-sm text-center mt-4">
+                Already have an account?{" "}
+                <Link to="/login" className="text-blue-500 hover:underline">
+                  Login here
+                </Link>
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+        <div>
+          <Lottie animationData={regiterImage}></Lottie>
+        </div>
       </div>
     </div>
   );
