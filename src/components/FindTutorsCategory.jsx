@@ -38,7 +38,7 @@ const FindTutorsCategory = () => {
   if (tutors.length === 0) {
     return (
       <p className="text-center py-8">
-        No tutors found for the category "{category}".
+        No tutors found for the category `{category}`.
       </p>
     );
   }
@@ -52,7 +52,7 @@ const FindTutorsCategory = () => {
         {tutors.map((tutor) => (
           <div
             key={tutor._id}
-            className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-all"
+            className="shadow-md rounded-lg p-4 hover:shadow-lg transition-all border"
           >
             <img
               src={tutor.image}
@@ -61,12 +61,10 @@ const FindTutorsCategory = () => {
             />
             <div className="mt-4">
               <h3 className="text-xl font-semibold">{tutor.name}</h3>
-              <p className="text-sm text-gray-600">
-                Language: {tutor.language}
-              </p>
-              <p className="text-sm text-gray-600">Price: {tutor.price}</p>
-              <p className="text-sm text-gray-600">Review: {tutor.review}</p>
-              <p className="mt-2 text-gray-700">{tutor.details}</p>
+              <p className="text-sm">Language: {tutor.language}</p>
+              <p className="text-sm">Price: {tutor.price}</p>
+              <p className="text-sm">Review: {tutor.review}</p>
+              <p className="mt-2">{tutor.details}</p>
             </div>
           </div>
         ))}
