@@ -14,7 +14,7 @@ function MyTutorials() {
     const fetchTutorials = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/tutorials/user/${user.email}`,
+          `https://b10a11-server-side-parthosarothi46.vercel.app/tutorials/user/${user.email}`,
           {
             withCredentials: true,
           }
@@ -32,7 +32,9 @@ function MyTutorials() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/tutorials/${id}`);
+      await axios.delete(
+        `https://b10a11-server-side-parthosarothi46.vercel.app/tutorials/${id}`
+      );
       setTutorials(tutorials.filter((tutorial) => tutorial._id !== id));
     } catch (error) {
       console.error("Error deleting tutorial:", error);

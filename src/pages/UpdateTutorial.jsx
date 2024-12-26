@@ -21,7 +21,7 @@ function UpdateTutorial() {
     const fetchTutorial = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/tutorials/${id}`
+          `https://b10a11-server-side-parthosarothi46.vercel.app/tutorials/${id}`
         );
         setTutorial(response.data);
         setFormData({
@@ -48,7 +48,10 @@ function UpdateTutorial() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/tutorials/${id}`, formData);
+      await axios.put(
+        `https://b10a11-server-side-parthosarothi46.vercel.app/tutorials/${id}`,
+        formData
+      );
       navigate("/my-tutorials");
     } catch (error) {
       console.error("Error updating tutorial:", error);

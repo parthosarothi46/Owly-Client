@@ -17,7 +17,7 @@ function TutorDetails() {
     const fetchTutorDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/tutorials/${details}`
+          `https://b10a11-server-side-parthosarothi46.vercel.app/tutorials/${details}`
         );
         setTutor(response.data);
       } catch (err) {
@@ -48,7 +48,10 @@ function TutorDetails() {
       };
 
       // Replace with your API endpoint for storing booking details
-      await axios.post("http://localhost:5000/bookings", bookingData);
+      await axios.post(
+        "https://b10a11-server-side-parthosarothi46.vercel.app/bookings",
+        bookingData
+      );
 
       alert("Tutor booked successfully!");
     } catch (err) {

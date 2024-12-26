@@ -39,7 +39,7 @@ function AddTutorials() {
       };
 
       const response = await axios.post(
-        "http://localhost:5000/tutorials",
+        "https://b10a11-server-side-parthosarothi46.vercel.app/tutorials",
         sanitizedData
       );
       console.log("Tutorial added successfully:", response.data);

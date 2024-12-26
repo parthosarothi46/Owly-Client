@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Link } from "lucide-react";
+import logo from "../assets/logo.webp";
 
 export default function Footer() {
   return (
@@ -8,9 +10,9 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           {/* Brand Section */}
           <div>
-            <h1 className="text-2xl font-bold text-white dark:text-black">
-              TutorBook
-            </h1>
+            <div className="bg-white h-11 w-44 rounded-xl">
+              <img src={logo} alt="" className="h-full w-full object-contain" />
+            </div>
             <p className="text-sm mt-2 text-white dark:text-black">
               Empowering learners worldwide with the best tutors.
             </p>

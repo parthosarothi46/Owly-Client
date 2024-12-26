@@ -11,7 +11,9 @@ const FindTutorsCategory = () => {
   useEffect(() => {
     const fetchTutors = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/tutorials");
+        const response = await axios.get(
+          "https://b10a11-server-side-parthosarothi46.vercel.app/tutorials"
+        );
         const filteredTutors = response.data.filter(
           (tutor) => tutor.language.toLowerCase() === category.toLowerCase()
         );

@@ -67,14 +67,18 @@ export const AuthProvider = ({ children }) => {
           email: currentUser.email,
         };
         axios
-          .post("http://localhost:5000/jwt", user, {
-            withCredentials: true,
-          })
+          .post(
+            "https://b10a11-server-side-parthosarothi46.vercel.app/jwt",
+            user,
+            {
+              withCredentials: true,
+            }
+          )
           .then((res) => setLoading(false));
       } else {
         axios
           .post(
-            "http://localhost:5000/logout",
+            "https://b10a11-server-side-parthosarothi46.vercel.app/logout",
             {},
             {
               withCredentials: true,
