@@ -5,7 +5,8 @@ function UserReviews() {
     {
       id: 1,
       name: "John Doe",
-      image: "https://via.placeholder.com/100",
+      image:
+        "https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-1.png",
       rating: 5,
       review:
         "This platform has been a game changer for my learning journey. The tutors are highly professional and approachable!",
@@ -13,15 +14,17 @@ function UserReviews() {
     {
       id: 2,
       name: "Jane Smith",
-      image: "https://via.placeholder.com/100",
+      image:
+        "https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-male-2.png",
       rating: 4,
       review:
         "Great experience! The lessons are tailored to my needs, and the support team is always helpful.",
     },
     {
       id: 3,
-      name: "Michael Brown",
-      image: "https://via.placeholder.com/100",
+      name: "Jenny Wilson",
+      image:
+        "https://cdn.rareblocks.xyz/collection/clarity/images/testimonial/4/avatar-female.png",
       rating: 5,
       review:
         "Excellent service! Highly recommend this platform for anyone looking to enhance their skills.",
@@ -29,16 +32,16 @@ function UserReviews() {
   ];
 
   return (
-    <div className="py-12 bg-gray-50">
+    <div className="py-12">
       <div className="container mx-auto px-6 sm:px-12 lg:px-24">
-        <h2 className="text-3xl font-bold text-center mb-8">
+        <h2 className="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-gray-100">
           What Our Users Say
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reviews.map((review) => (
             <div
               key={review.id}
-              className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center text-center"
+              className="p-6 rounded-lg shadow-lg flex flex-col items-center text-center border border-gray-300"
             >
               {/* User Image */}
               <img
@@ -48,7 +51,9 @@ function UserReviews() {
               />
 
               {/* User Name */}
-              <h3 className="text-lg font-semibold">{review.name}</h3>
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                {review.name}
+              </h3>
 
               {/* User Rating */}
               <div className="flex items-center justify-center gap-1 text-yellow-500 my-3">
@@ -60,13 +65,15 @@ function UserReviews() {
                     <Star
                       key={i + review.rating}
                       size={18}
-                      className="text-gray-300"
+                      className="text-gray-300 dark:text-gray-600"
                     />
                   ))}
               </div>
 
               {/* User Review */}
-              <p className="text-gray-600 leading-relaxed">{review.review}</p>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                {review.review}
+              </p>
             </div>
           ))}
         </div>
