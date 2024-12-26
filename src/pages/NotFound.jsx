@@ -1,18 +1,14 @@
 import { Button } from "@/components/ui/button";
+import Lottie from "lottie-react";
+import notFound from "../assets/404.json";
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="max-w-md text-center">
-        <img
-          src="https://via.placeholder.com/300x200?text=404+Illustration"
-          alt="404 Not Found"
-          className="mb-8 w-full"
-        />
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">
-          Page Not Found
-        </h1>
-        <p className="text-gray-600 mb-6">
+        <Lottie animationData={notFound}></Lottie>
+        <h1 className="text-4xl font-bold mb-4">Page Not Found</h1>
+        <p className="mb-6">
           Sorry, the page you're looking for doesn't exist or has been moved.
         </p>
         <Button
