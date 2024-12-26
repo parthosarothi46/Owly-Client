@@ -49,66 +49,97 @@ function UpdateTutorial() {
     e.preventDefault();
     try {
       await axios.put(`http://localhost:5000/tutorials/${id}`, formData);
-      navigate("/my-tutorials"); // Redirect after updating
+      navigate("/my-tutorials");
     } catch (error) {
       console.error("Error updating tutorial:", error);
     }
   };
 
-  if (loading) return <p>Loading tutorial...</p>;
+  if (loading)
+    return <p className="text-center text-gray-600">Loading tutorial...</p>;
 
   return (
-    <div className="container mx-auto py-10">
-      <h1 className="text-2xl font-bold text-center mb-6">Update Tutorial</h1>
+    <div className="container mx-auto py-10 px-4">
+      <h1 className="text-3xl font-extrabold text-center mb-8">
+        Update Tutorial
+      </h1>
       <form
         onSubmit={handleSubmit}
-        className="max-w-lg mx-auto p-6 border rounded-md"
+        className="max-w-2xl mx-auto p-8 shadow-lg rounded-lg"
       >
-        <div>
-          <label className="block mb-2">Name (Read-only)</label>
-          <Input type="text" value={tutorial.name} readOnly />
+        <div className="mb-6">
+          <label className="block text-sm font-semibold mb-2">
+            Name : (Read-only)
+          </label>
+          <Input
+            type="text"
+            value={tutorial.name}
+            readOnly
+            className="cursor-not-allowed"
+          />
         </div>
-        <div>
-          <label className="block mb-2">Email (Read-only)</label>
-          <Input type="email" value={tutorial.email} readOnly />
+        <div className="mb-6">
+          <label className="block text-sm font-semibold mb-2">
+            Email : (Read-only)
+          </label>
+          <Input
+            type="email"
+            value={tutorial.email}
+            readOnly
+            className="cursor-not-allowed"
+          />
         </div>
-        <div>
-          <label className="block mb-2">Image</label>
+        <div className="mb-6">
+          <label className="block text-sm font-semibold mb-2">
+            Image URL :
+          </label>
           <Input
             type="text"
             name="image"
             value={formData.image}
             onChange={handleChange}
+            placeholder="Enter image URL"
+            className="border-gray-300"
           />
         </div>
-        <div>
-          <label className="block mb-2">Language</label>
+        <div className="mb-6">
+          <label className="block text-sm font-semibold mb-2">Language :</label>
           <Input
             type="text"
             name="language"
             value={formData.language}
             onChange={handleChange}
+            placeholder="Enter language"
+            className="border-gray-300"
           />
         </div>
-        <div>
-          <label className="block mb-2">Price</label>
+        <div className="mb-6">
+          <label className="block text-sm font-semibold mb-2">Price :</label>
           <Input
             type="number"
             name="price"
             value={formData.price}
             onChange={handleChange}
+            placeholder="Enter price"
+            className="border-gray-300"
           />
         </div>
-        <div>
-          <label className="block mb-2">Description</label>
+        <div className="mb-6">
+          <label className="block text-sm font-semibold mb-2">
+            Description :
+          </label>
           <Textarea
             name="description"
             value={formData.description}
             onChange={handleChange}
+            placeholder="Enter a brief description"
+            className="border-gray-300"
           />
         </div>
-        <div>
-          <Button type="submit">Update</Button>
+        <div className="flex justify-center">
+          <Button type="submit" className="font-semibold py-2 px-6 rounded-lg">
+            Update Tutorial
+          </Button>
         </div>
       </form>
     </div>
