@@ -41,7 +41,7 @@ function UserReviews() {
           {reviews.map((review) => (
             <div
               key={review.id}
-              className="p-6 rounded-lg shadow-lg flex flex-col items-center text-center border border-gray-300"
+              className="p-6 rounded-lg shadow-lg flex flex-col items-center text-center border"
             >
               {/* User Image */}
               <img
