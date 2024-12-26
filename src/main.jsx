@@ -4,13 +4,16 @@ import "./index.css";
 import Routes from "./routes/Routes";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./components/ThemeProvider";
+import { TooltipProvider } from "./components/ui/tooltip";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ThemeProvider>
-      <AuthProvider>
-        <Routes />
-      </AuthProvider>
+      <TooltipProvider>
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
+      </TooltipProvider>
     </ThemeProvider>
   </StrictMode>
 );

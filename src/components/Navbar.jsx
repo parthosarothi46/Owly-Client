@@ -7,15 +7,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "@/context/AuthContext";
-import { Sun, Moon, Monitor, Menu } from "lucide-react"; // Icons for theme and menu toggle
+import { Sun, Moon, Monitor, Menu } from "lucide-react";
 import { Link } from "react-router";
 import { useTheme } from "./ThemeProvider";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import logo from "../assets/logo.webp";
 
 function Navbar() {
   const { user, logout } = useAuth();
   const { theme, setTheme } = useTheme();
 
-  // Handle Logout
   const handleLogout = async () => {
     try {
       await logout();
@@ -25,129 +30,156 @@ function Navbar() {
   };
 
   return (
-    <nav
-      className={`shadow-md py-4 px-6 ${
-        theme === "light" ? "bg-white text-black" : "bg-gray-900 text-white"
-      }`}
-    >
+    <nav className="shadow-md py-4 px-6">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo/Website Name */}
-        <div className="text-2xl font-bold">
-          <Link to="/" className="hover:text-gray-500">
-            TutorConnect
+        <div className="text-2xl font-bold bg-white h-11 w-44 rounded-xl">
+          <Link to="/">
+            <img src={logo} alt="" className="h-full w-full object-contain" />
           </Link>
         </div>
 
-        {/* Desktop Navigation Links */}
-        <div className="hidden md:flex space-x-6">
-          {[
-            "Home",
-            "Find Tutors",
-            "Add Tutorials",
-            "My Tutorials",
-            "My Booked Tutors",
-          ].map((item, index) => (
-            <Link
-              key={index}
-              to={`/${item.toLowerCase().replaceAll(" ", "-")}`}
-              className="hover:text-gray-500"
-            >
-              {item}
-            </Link>
-          ))}
-        </div>
-
-        {/* Mobile Navigation (Hamburger Menu) */}
-        <div className="md:hidden">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost">
-                <Menu className="w-6 h-6" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              {[
-                "Home",
-                "Find Tutors",
-                "Add Tutorials",
-                "My Tutorials",
-                "My Booked Tutors",
-              ].map((item, index) => (
-                <DropdownMenuItem asChild key={index}>
-                  <Link to={`/${item.toLowerCase().replace(" ", "-")}`}>
-                    {item}
-                  </Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-
-        {/* Theme Toggle Button and User Section */}
-        <div className="flex items-center space-x-4">
+        {/* Mobile and Tablet View */}
+        <div className="flex items-center space-x-4 lg:hidden">
           {/* Theme Toggle Button */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="hover:bg-gray-700">
+              <Button variant="ghost">
                 {theme === "light" && <Sun />}
                 {theme === "dark" && <Moon />}
                 {theme === "system" && <Monitor />}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem
-                onClick={() => setTheme("light")}
-                className="flex items-center space-x-2"
-              >
-                <Sun /> <span>Light</span>
+              <DropdownMenuItem onClick={() => setTheme("light")}>
+                <Sun className="mr-2 w-4 h-4" />
+                Light
               </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => setTheme("dark")}
-                className="flex items-center space-x-2"
-              >
-                <Moon /> <span>Dark</span>
+              <DropdownMenuItem onClick={() => setTheme("dark")}>
+                <Moon className="mr-2 w-4 h-4" />
+                Dark
               </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => setTheme("system")}
-                className="flex items-center space-x-2"
-              >
-                <Monitor /> <span>System</span>
+              <DropdownMenuItem onClick={() => setTheme("system")}>
+                <Monitor className="mr-2 w-4 h-4" />
+                System
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* User Section */}
-          {!user ? (
-            <Link to="/login">
-              <Button className="bg-gray-700 hover:bg-gray-600 text-white">
-                Login
-              </Button>
-            </Link>
-          ) : (
-            <div className="flex items-center space-x-4">
-              {/* Avatar with Hover Tooltip */}
-              <Avatar
-                className="cursor-pointer"
-                title={user.displayName || "User"} // Tooltip with user's name
-              >
-                <AvatarImage
-                  src={user.photoURL || ""}
-                  alt={user.displayName || "User"}
-                />
-                <AvatarFallback>
-                  {user.displayName?.[0]?.toUpperCase() || "U"}
-                </AvatarFallback>
-              </Avatar>
-
-              {/* Logout Button */}
-              <Button
-                onClick={handleLogout}
-                className="bg-gray-700 hover:bg-gray-600 text-white"
-              >
-                Logout
-              </Button>
-            </div>
+          {/* User Avatar with Tooltip */}
+          {user && (
+            <Tooltip>
+              <TooltipTrigger>
+                <Avatar className="cursor-pointer">
+                  <AvatarImage
+                    src={user.photoURL || ""}
+                    alt={user.displayName || "User"}
+                  />
+                  <AvatarFallback>
+                    {user.displayName?.[0]?.toUpperCase() || "U"}
+                  </AvatarFallback>
+                </Avatar>
+              </TooltipTrigger>
+              <TooltipContent>{user.displayName || "User"}</TooltipContent>
+            </Tooltip>
           )}
+
+          {/* Hamburger Menu */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="p-2">
+                <Menu className="w-6 h-6" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuItem asChild>
+                <Link to="/">Home</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/find-tutors">Find Tutors</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/add-tutorials">Add Tutorials</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/my-tutorials">My Tutorials</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/my-booked-tutors">My Booked Tutors</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                {!user ? (
+                  <Link to="/login">
+                    <Button className="w-full">Login</Button>
+                  </Link>
+                ) : (
+                  <Button onClick={handleLogout} className="w-full">
+                    Logout
+                  </Button>
+                )}
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+
+        {/* Desktop View */}
+        <div className="hidden lg:flex items-center space-x-6">
+          <Link to="/">Home</Link>
+          <Link to="/find-tutors">Find Tutors</Link>
+          <Link to="/add-tutorials">Add Tutorials</Link>
+          <Link to="/my-tutorials">My Tutorials</Link>
+          <Link to="/my-booked-tutors">My Booked Tutors</Link>
+          <div className="flex items-center space-x-4">
+            {/* Theme Toggle */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost">
+                  {theme === "light" && <Sun />}
+                  {theme === "dark" && <Moon />}
+                  {theme === "system" && <Monitor />}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem onClick={() => setTheme("light")}>
+                  <Sun className="mr-2 w-4 h-4" />
+                  Light
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("dark")}>
+                  <Moon className="mr-2 w-4 h-4" />
+                  Dark
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setTheme("system")}>
+                  <Monitor className="mr-2 w-4 h-4" />
+                  System
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* User Avatar with Tooltip and Logout Button */}
+            {user ? (
+              <div className="flex items-center space-x-4">
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Avatar className="cursor-pointer">
+                      <AvatarImage
+                        src={user.photoURL || ""}
+                        alt={user.displayName || "User"}
+                      />
+                      <AvatarFallback>
+                        {user.displayName?.[0]?.toUpperCase() || "U"}
+                      </AvatarFallback>
+                    </Avatar>
+                  </TooltipTrigger>
+                  <TooltipContent>{user.displayName || "User"}</TooltipContent>
+                </Tooltip>
+                <Button onClick={handleLogout}>Logout</Button>
+              </div>
+            ) : (
+              <Link to="/login">
+                <Button>Login</Button>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </nav>
