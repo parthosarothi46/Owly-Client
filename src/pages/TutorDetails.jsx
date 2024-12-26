@@ -16,7 +16,6 @@ function TutorDetails() {
   useEffect(() => {
     const fetchTutorDetails = async () => {
       try {
-        // Replace with your API endpoint for fetching tutor details
         const response = await axios.get(
           `http://localhost:5000/tutorials/${details}`
         );
@@ -75,18 +74,17 @@ function TutorDetails() {
           className="w-full h-64 object-cover rounded-md mb-4"
         />
         <h2 className="text-2xl font-bold mb-2">{tutor.name}</h2>
-        <p className="text-gray-700 mb-1">Language: {tutor.language}</p>
-        <p className="text-gray-700 mb-1">Description: {tutor.description}</p>
-        <p className="text-gray-700 mb-1">Price: ${tutor.price}</p>
-        <p className="text-gray-700 mb-4">Review: {tutor.review}</p>
+        <p className="mb-1">Language: {tutor.language}</p>
+        <p className="mb-1">Description: {tutor.description}</p>
+        <p className="mb-1">Price: ${tutor.price}</p>
+        <p className="mb-4">Review: {tutor.review}</p>
         <Button
           onClick={handleBooking}
           disabled={bookingLoading}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white"
+          className="w-full"
         >
           {bookingLoading ? "Booking..." : "Book"}
         </Button>
-        {bookingError && <p className="text-red-500 mt-4">{bookingError}</p>}
       </div>
     </div>
   );

@@ -65,7 +65,7 @@ function UpdateTutorial() {
       </h1>
       <form
         onSubmit={handleSubmit}
-        className="max-w-2xl mx-auto p-8 shadow-lg rounded-lg"
+        className="max-w-2xl mx-auto p-8 shadow-lg rounded-lg border border-gray-200"
       >
         <div className="mb-6">
           <label className="block text-sm font-semibold mb-2">
