@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router";
+import { Input } from "@/components/ui/input";
 
 function FindTutors() {
   const [tutors, setTutors] = useState([]);
@@ -15,9 +16,7 @@ function FindTutors() {
   useEffect(() => {
     const fetchTutors = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/tutorials", {
-          withCredentials: true,
-        });
+        const response = await axios.get("http://localhost:5000/tutorials");
         setTutors(response.data);
         setFilteredTutors(response.data); // Initialize filtered tutors
       } catch (err) {
@@ -64,14 +63,15 @@ function FindTutors() {
     <div className="container mx-auto py-10">
       <h1 className="text-2xl font-bold text-center mb-6">Find Tutors</h1>
       <div className="mb-6">
-        <input
+        <Input
           type="text"
           value={searchQuery}
           onChange={handleSearch}
-          placeholder="Search by language..."
-          className="w-full md:w-1/2 mx-auto block px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        />
+          placeholder="Search by Language"
+          className="w-full md:w-1/2 mx-auto block px-4 py-2 border border-gray-300 rounded-md shadow-sm"
+        ></Input>
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {currentTutors.map((tutor) => (
           <div
@@ -81,11 +81,11 @@ function FindTutors() {
             <img
               src={tutor.image}
               alt={tutor.name}
-              className="w-full h-40 object-cover rounded-md mb-4"
+              className="w-full h-48 object-cover rounded-md mb-4"
             />
             <h2 className="text-xl font-bold">{tutor.name}</h2>
-            <p className="text-gray-700">Language: {tutor.language}</p>
-            <p className="text-gray-700">Review: {tutor.review}</p>
+            <p>Language: {tutor.language}</p>
+            <p>Review: {tutor.review}</p>
             <Link to={`/tutor/${tutor._id}`}>
               <Button className="mt-4 w-full">Details</Button>
             </Link>
