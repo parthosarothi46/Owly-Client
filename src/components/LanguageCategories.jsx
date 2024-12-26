@@ -24,15 +24,13 @@ const LanguageCategories = () => {
           <Link
             to={`/find-tutors/${category.route}`}
             key={category.id}
-            className="flex items-center justify-between bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-all"
+            className="flex items-center justify-between shadow-md rounded-lg p-4 hover:shadow-lg transition-all border"
           >
             <div className="flex items-center space-x-4">
               <span className="text-4xl">{category.logo}</span>
-              <h3 className="text-xl font-semibold text-gray-800">
-                {category.title}
-              </h3>
+              <h3 className="text-xl font-semibold">{category.title}</h3>
             </div>
-            <ArrowRight className="text-gray-500" />
+            <ArrowRight />
           </Link>
         ))}
       </div>
