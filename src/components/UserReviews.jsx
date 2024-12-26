@@ -33,7 +33,7 @@ function UserReviews() {
 
   return (
     <div className="py-12">
-      <div className="container mx-auto px-6 sm:px-12 lg:px-24">
+      <div className="container mx-auto">
         <h2 className="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-gray-100">
           What Our Users Say
         </h2>
