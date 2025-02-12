@@ -63,6 +63,13 @@ const Stats = () => {
     },
   ];
 
+  const colorMap = {
+    blue: "text-blue-500 dark:text-blue-400",
+    yellow: "text-yellow-500 dark:text-yellow-400",
+    green: "text-green-500 dark:text-green-400",
+    purple: "text-purple-500 dark:text-purple-400",
+  };
+
   return (
     <div className="py-16 px-4 xl:px-0">
       <div className="container mx-auto">
@@ -90,9 +97,7 @@ const Stats = () => {
                       : "bg-purple-100"
                   } dark:bg-${item.color}-900`}
                 >
-                  <item.icon
-                    className={`w-6 h-6 text-${item.color}-500 dark:text-${item.color}-400`}
-                  />
+                  <item.icon className={`w-6 h-6 ${colorMap[item.color]}`} />
                 </div>
                 <h3
                   className={`text-3xl font-bold text-${item.color}-500 dark:text-${item.color}-400`}

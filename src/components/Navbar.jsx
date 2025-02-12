@@ -107,13 +107,13 @@ function Navbar() {
     <nav
       className={`sticky top-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg"
+          ? "bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-lg"
           : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
-          <div className="text-2xl font-bold bg-white h-11 w-44 rounded-xl">
+          <div className="text-2xl font-bold bg-white dark:bg-white/90 h-11 w-44 rounded-xl">
             <Link to="/">
               <img src={logo} alt="" className="h-full w-full object-contain" />
             </Link>
