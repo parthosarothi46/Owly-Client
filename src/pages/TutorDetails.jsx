@@ -54,10 +54,7 @@ function TutorDetails() {
         email: user.email,
       };
 
-      await axios.post(
-        "https://b10a11-server-side-parthosarothi46.vercel.app/bookings",
-        bookingData
-      );
+      await axios.post(`${import.meta.env.VITE_apiKey}/bookings`, bookingData);
 
       toast({
         title: "Booking Successful",

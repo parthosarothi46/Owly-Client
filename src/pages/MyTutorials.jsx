@@ -14,7 +14,7 @@ function MyTutorials() {
     const fetchTutorials = async () => {
       try {
         const response = await axios.get(
-          `https://b10a11-server-side-parthosarothi46.vercel.app/tutorials/user/${user.email}`,
+          `${import.meta.env.VITE_apiKey}/tutorials/user/${user.email}`,
           {
             withCredentials: true,
           }

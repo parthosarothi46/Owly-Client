@@ -21,7 +21,7 @@ function UpdateTutorial() {
     const fetchTutorial = async () => {
       try {
         const response = await axios.get(
-          `https://b10a11-server-side-parthosarothi46.vercel.app/tutorials/${id}`
+          `${import.meta.env.VITE_apiKey}/tutorials/${id}`
         );
         setTutorial(response.data);
         setFormData({
@@ -49,7 +49,7 @@ function UpdateTutorial() {
     e.preventDefault();
     try {
       await axios.put(
-        `https://b10a11-server-side-parthosarothi46.vercel.app/tutorials/${id}`,
+        `${import.meta.env.VITE_apiKey}/tutorials/${id}`,
         formData
       );
       navigate("/my-tutorials");

@@ -39,7 +39,7 @@ function AddTutorials() {
       };
 
       const response = await axios.post(
-        "https://b10a11-server-side-parthosarothi46.vercel.app/tutorials",
+        `${import.meta.env.VITE_apiKey}/tutorials`,
         sanitizedData
       );
       console.log("Tutorial added successfully:", response.data);

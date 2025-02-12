@@ -17,7 +17,7 @@ function FindTutors() {
     const fetchTutors = async () => {
       try {
         const response = await axios.get(
-          "https://b10a11-server-side-parthosarothi46.vercel.app/tutorials"
+          `${import.meta.env.VITE_apiKey}/tutorials`
         );
         setTutors(response.data);
         setFilteredTutors(response.data); // Initialize filtered tutors
