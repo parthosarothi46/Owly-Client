@@ -20,7 +20,7 @@ function TutorDetails() {
     const fetchTutorDetails = async () => {
       try {
         const response = await axios.get(
-          `https://b10a11-server-side-parthosarothi46.vercel.app/tutorials/${details}`
+          `${import.meta.env.VITE_apiURL}/tutorials/${details}`
         );
         setTutor(response.data);
       } catch (err) {
@@ -54,7 +54,7 @@ function TutorDetails() {
         email: user.email,
       };
 
-      await axios.post(`${import.meta.env.VITE_apiKey}/bookings`, bookingData);
+      await axios.post(`${import.meta.env.VITE_apiURL}/bookings`, bookingData);
 
       toast({
         title: "Booking Successful",

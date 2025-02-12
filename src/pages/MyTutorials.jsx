@@ -14,7 +14,7 @@ function MyTutorials() {
     const fetchTutorials = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_apiKey}/tutorials/user/${user.email}`,
+          `${import.meta.env.VITE_apiURL}/tutorials/user/${user.email}`,
           {
             withCredentials: true,
           }
@@ -32,9 +32,7 @@ function MyTutorials() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(
-        `https://b10a11-server-side-parthosarothi46.vercel.app/tutorials/${id}`
-      );
+      await axios.delete(`${import.meta.env.VITE_apiURL}/tutorials/${id}`);
       setTutorials(tutorials.filter((tutorial) => tutorial._id !== id));
     } catch (error) {
       console.error("Error deleting tutorial:", error);

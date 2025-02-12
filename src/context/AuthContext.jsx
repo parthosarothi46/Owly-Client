@@ -67,13 +67,13 @@ export const AuthProvider = ({ children }) => {
           email: currentUser.email,
         };
         axios
-          .post(`${import.meta.env.VITE_apiKey}/jwt`, user, {
+          .post(`${import.meta.env.VITE_apiURL}/jwt`, user, {
             withCredentials: true,
           })
           .then((res) => setLoading(false));
       } else {
         axios
-          .post(`${import.meta.env.VITE_apiKey}/logout`, {
+          .post(`${import.meta.env.VITE_apiURL}/logout`, {
             withCredentials: true,
           })
           .then((res) => setLoading(false));

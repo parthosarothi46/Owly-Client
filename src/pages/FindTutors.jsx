@@ -17,7 +17,7 @@ function FindTutors() {
     const fetchTutors = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_apiKey}/tutorials`
+          `${import.meta.env.VITE_apiURL}/tutorials`
         );
         setTutors(response.data);
         setFilteredTutors(response.data); // Initialize filtered tutors

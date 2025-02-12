@@ -49,7 +49,7 @@ function UpdateTutorial() {
     e.preventDefault();
     try {
       await axios.put(
-        `${import.meta.env.VITE_apiKey}/tutorials/${id}`,
+        `${import.meta.env.VITE_apiURL}/tutorials/${id}`,
         formData
       );
       navigate("/my-tutorials");

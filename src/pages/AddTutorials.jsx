@@ -39,7 +39,7 @@ function AddTutorials() {
       };
 
       const response = await axios.post(
-        `${import.meta.env.VITE_apiKey}/tutorials`,
+        `${import.meta.env.VITE_apiURL}/tutorials`,
         sanitizedData
       );
       console.log("Tutorial added successfully:", response.data);

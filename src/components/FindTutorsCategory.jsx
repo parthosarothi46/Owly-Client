@@ -12,7 +12,7 @@ const FindTutorsCategory = () => {
     const fetchTutors = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_apiKey}/tutorials`
+          `${import.meta.env.VITE_apiURL}/tutorials`
         );
         const filteredTutors = response.data.filter(
           (tutor) => tutor.language.toLowerCase() === category.toLowerCase()

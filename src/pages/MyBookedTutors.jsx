@@ -13,7 +13,7 @@ function MyBookedTutors() {
     const fetchBookedTutors = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_apiKey}/bookings/${user.email}`
+          `${import.meta.env.VITE_apiURL}/bookings/${user.email}`
         );
         setBookedTutors(response.data);
       } catch (error) {
@@ -31,12 +31,12 @@ function MyBookedTutors() {
     try {
       // Increment review count on the backend
       const patchResponse = await axios.patch(
-        `${import.meta.env.VITE_apiKey}/tutorials/review/${tutorialId}`
+        `${import.meta.env.VITE_apiURL}/tutorials/review/${tutorialId}`
       );
 
       // Fetch the updated tutorial details
       const getResponse = await axios.get(
-        `${import.meta.env.VITE_apiKey}/tutorials/${tutorialId}`
+        `${import.meta.env.VITE_apiURL}/tutorials/${tutorialId}`
       );
 
       // Update the state with the new review count
