@@ -1,14 +1,17 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/context/AuthContext";
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Loader2 } from "lucide-react";
+import { toast, Toaster } from "sonner";
 
 function AddTutorials() {
   const { user } = useAuth();
-  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: user?.displayName || "",
@@ -21,7 +24,6 @@ function AddTutorials() {
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,138 +37,121 @@ function AddTutorials() {
     try {
       const sanitizedData = {
         ...formData,
-        price: parseFloat(formData.price),
+        price: Number.parseFloat(formData.price),
       };
 
-      const response = await axios.post(
+      await axios.post(
         `${import.meta.env.VITE_apiURL}/tutorials`,
         sanitizedData
       );
-      console.log("Tutorial added successfully:", response.data);
-      navigate("/my-tutorials");
+
+      toast.success("Tutorial added successfully! 🎉");
+
+      setFormData({
+        name: user?.displayName || "",
+        email: user?.email || "",
+        image: "",
+        language: "",
+        price: "",
+        description: "",
+        review: 0,
+      });
     } catch (err) {
       console.error("Error adding tutorial:", err);
-      setError("Failed to add tutorial. Please try again.");
+      toast.error("Failed to add tutorial. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
+  const formFields = [
+    { name: "name", label: "Name", type: "text", readOnly: true },
+    { name: "email", label: "Email", type: "email", readOnly: true },
+    {
+      name: "image",
+      label: "Image URL",
+      type: "url",
+      placeholder: "Enter the image URL",
+    },
+    {
+      name: "language",
+      label: "Language",
+      type: "text",
+      placeholder: "Enter the language",
+    },
+    {
+      name: "price",
+      label: "Price ($)",
+      type: "number",
+      placeholder: "Enter the price",
+      min: "0",
+    },
+    { name: "review", label: "Review", type: "number", readOnly: true },
+  ];
+
   return (
     <div className="container mx-auto py-10 px-4 xl:px-0">
-      <h1 className="text-3xl font-bold text-center mb-8">Add Tutorial</h1>
-      {error && (
-        <div className="text-center mb-4">
-          <p className="text-red-500 font-semibold">{error}</p>
-        </div>
-      )}
-      <form
-        onSubmit={handleSubmit}
-        className="max-w-lg mx-auto p-6 border border-gray-200 rounded-md shadow-sm space-y-4"
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
-        <div>
-          <label htmlFor="name" className="block mb-2">
-            Name :
-          </label>
-          <Input
-            id="name"
-            type="text"
-            name="name"
-            value={formData.name}
-            readOnly
-          />
-        </div>
-
-        <div>
-          <label htmlFor="email" className="block mb-2">
-            Email :
-          </label>
-          <Input
-            id="email"
-            type="email"
-            name="email"
-            value={formData.email}
-            readOnly
-          />
-        </div>
-
-        <div>
-          <label htmlFor="image" className="block mb-2">
-            Image URL :
-          </label>
-          <Input
-            id="image"
-            type="url"
-            name="image"
-            value={formData.image}
-            onChange={handleChange}
-            placeholder="Enter the image URL"
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="language" className="block mb-2">
-            Language :
-          </label>
-          <Input
-            id="language"
-            type="text"
-            name="language"
-            value={formData.language}
-            onChange={handleChange}
-            placeholder="Enter the language"
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="price" className="block mb-2">
-            Price : ($)
-          </label>
-          <Input
-            id="price"
-            type="number"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-            placeholder="Enter the price"
-            required
-            min="0"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="description" className="block mb-2">
-            Description
-          </label>
-          <Textarea
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            placeholder="Enter a description"
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="review" className="block mb-2">
-            Review
-          </label>
-          <Input
-            id="review"
-            type="number"
-            name="review"
-            value={formData.review}
-            readOnly
-          />
-        </div>
-
-        <Button type="submit" disabled={loading} className="w-full">
-          {loading ? "Adding" : "Add Tutorial"}
-        </Button>
-      </form>
+        <Card className="max-w-2xl mx-auto">
+          <CardHeader>
+            <CardTitle className="text-3xl font-bold text-center">
+              Add Tutorial
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {formFields.map((field) => (
+                <div key={field.name} className="space-y-2">
+                  <Label htmlFor={field.name} className="text-sm font-medium">
+                    {field.label}
+                  </Label>
+                  <Input
+                    id={field.name}
+                    type={field.type}
+                    name={field.name}
+                    value={formData[field.name]}
+                    onChange={handleChange}
+                    placeholder={field.placeholder}
+                    required={!field.readOnly}
+                    readOnly={field.readOnly}
+                    min={field.min}
+                    className={field.readOnly ? "bg-gray-100" : ""}
+                  />
+                </div>
+              ))}
+              <div className="space-y-2">
+                <Label htmlFor="description" className="text-sm font-medium">
+                  Description
+                </Label>
+                <Textarea
+                  id="description"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  placeholder="Enter a description"
+                  required
+                  className="min-h-[100px]"
+                />
+              </div>
+              <Button type="submit" disabled={loading} className="w-full">
+                {loading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Adding Tutorial
+                  </>
+                ) : (
+                  "Add Tutorial"
+                )}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </motion.div>
+      <Toaster position="top-right" />
     </div>
   );
 }

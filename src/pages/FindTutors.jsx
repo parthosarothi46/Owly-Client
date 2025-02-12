@@ -144,7 +144,7 @@ function FindTutors() {
                       alt={tutor.name}
                       className="w-full h-48 object-cover"
                     />
-                    <Badge className="absolute top-2 right-2 bg-primary text-white">
+                    <Badge className="absolute top-2 right-2 bg-primary">
                       {tutor.language}
                     </Badge>
                   </div>
@@ -161,9 +161,7 @@ function FindTutors() {
                           }`}
                         />
                       ))}
-                      <span className="ml-2 text-sm text-gray-600">
-                        ({tutor.review})
-                      </span>
+                      <span className="ml-2 text-sm">({tutor.review})</span>
                     </div>
                   </CardContent>
                   <CardFooter className="p-4 pt-0">
