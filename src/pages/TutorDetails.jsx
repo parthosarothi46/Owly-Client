@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Star, DollarSign, Book, Clock, User } from "lucide-react";
 import { useParams } from "react-router";
-import { ToastProvider, ToastViewport } from "@/components/ui/toast";
-import { useToast } from "@/hooks/use-toast";
 import { Toaster } from "@/components/ui/toaster";
+import { ToastProvider } from "@/components/ui/toast";
+import { toast } from "@/hooks/use-toast";
 
 function TutorDetails() {
-  const { details } = useParams(); // Get the tutor ID from the route params
-  const { user } = useAuth(); // Get logged-in user info
+  const { details } = useParams();
+  const { user } = useAuth();
   const [tutor, setTutor] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [bookingLoading, setBookingLoading] = useState(false);
-  const { toast } = useToast();
+  // const { toast } = useToast();
 
   useEffect(() => {
     const fetchTutorDetails = async () => {
@@ -73,40 +77,119 @@ function TutorDetails() {
     }
   };
 
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
-  if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{
+            duration: 1,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "linear",
+          }}
+        >
+          <User className="w-12 h-12 text-primary" />
+        </motion.div>
+      </div>
+    );
 
-  if (!tutor) return <p className="text-center mt-10">Tutor not found.</p>;
+  if (error)
+    return (
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="text-center mt-10 text-red-500 text-xl"
+      >
+        {error}
+      </motion.p>
+    );
+
+  if (!tutor)
+    return (
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="text-center mt-10 text-xl"
+      >
+        Tutor not found.
+      </motion.p>
+    );
 
   return (
     <ToastProvider>
-      <div className="container mx-auto py-10">
-        <div className="relative max-w-lg mx-auto">
-          {/* Toasts will appear relative to this div */}
-          <h1 className="text-2xl font-bold text-center mb-6">Tutor Details</h1>
-          <div className="border border-gray-200 rounded-md shadow-sm p-6">
-            <img
-              src={tutor.image}
-              alt={tutor.name}
-              className="w-full h-64 object-cover rounded-md mb-4"
-            />
-            <h2 className="text-2xl font-bold mb-2">{tutor.name}</h2>
-            <p className="mb-1">Language: {tutor.language}</p>
-            <p className="mb-1">Description: {tutor.description}</p>
-            <p className="mb-1">Price: ${tutor.price}</p>
-            <p className="mb-4">Review: {tutor.review}</p>
-            <Button
-              onClick={handleBooking}
-              disabled={bookingLoading}
-              className="w-full"
-            >
-              {bookingLoading ? "Booking" : "Book"}
-            </Button>
-          </div>
-
-          {/* Toast Viewport positioned at the top-right of this container */}
-          <ToastViewport className="absolute top-0 right-0 flex flex-col items-end space-y-2" />
-        </div>
+      <div className="container mx-auto py-10 px-4 xl:px-0">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-4xl mx-auto"
+        >
+          <Card className="overflow-hidden">
+            <div className="relative">
+              <img
+                src={tutor.image || "/placeholder.svg"}
+                alt={tutor.name}
+                className="w-full h-80 object-cover"
+              />
+              <Badge className="absolute top-4 right-4 text-lg px-3 py-1">
+                {tutor.language}
+              </Badge>
+            </div>
+            <CardContent className="p-6">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h1 className="text-3xl font-bold mb-2">{tutor.name}</h1>
+                  <div className="flex items-center mb-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-5 h-5 ${
+                          i < Math.floor(tutor.review)
+                            ? "text-yellow-400 fill-current"
+                            : "text-gray-300"
+                        }`}
+                      />
+                    ))}
+                    <span className="ml-2">({tutor.review})</span>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-2xl font-bold text-primary">
+                    ${tutor.price}
+                  </p>
+                </div>
+              </div>
+              <p className=" mb-6">{tutor.description}</p>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex items-center">
+                  <Book className="w-5 h-5 mr-2 text-primary" />
+                  <span>{tutor.language} Tutor</span>
+                </div>
+                <div className="flex items-center">
+                  <Clock className="w-5 h-5 mr-2 text-primary" />
+                  <span>Flexible Schedule</span>
+                </div>
+                <div className="flex items-center">
+                  <User className="w-5 h-5 mr-2 text-primary" />
+                  <span>1-on-1 Lessons</span>
+                </div>
+                <div className="flex items-center">
+                  <DollarSign className="w-5 h-5 mr-2 text-primary" />
+                  <span>Money Back Guarantee</span>
+                </div>
+              </div>
+            </CardContent>
+            <CardFooter className="p-6">
+              <Button
+                onClick={handleBooking}
+                disabled={bookingLoading}
+                className="w-full text-lg py-6"
+              >
+                {bookingLoading ? "Booking..." : "Book Now"}
+              </Button>
+            </CardFooter>
+          </Card>
+        </motion.div>
       </div>
       <Toaster />
     </ToastProvider>
