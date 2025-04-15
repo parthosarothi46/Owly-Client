@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router";
 
 const Banner = () => {
   const slides = [
@@ -79,12 +80,14 @@ const Banner = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.5 }}
             >
-              <Button
-                size="lg"
-                className="mt-6 font-semibold text-lg px-8 py-6 transition-colors duration-300"
-              >
-                Get Started
-              </Button>
+              <Link to={"/find-tutors"}>
+                <Button
+                  size="lg"
+                  className="mt-6 font-semibold text-lg px-8 py-6 transition-colors duration-300"
+                >
+                  Get Started
+                </Button>
+              </Link>
             </motion.div>
           </div>
         </motion.div>

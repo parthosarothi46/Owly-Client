@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router";
 
-function AboutUs() {
+const About = () => {
   return (
     <div className="py-10 px-4 xl:px-0">
       <div className="container mx-auto">
@@ -28,14 +28,11 @@ function AboutUs() {
               With a focus on innovation and excellence, we provide tailored
               solutions to meet your needs and help you achieve your goals.
             </p>
-            <Link to={"/about"}>
-              <Button className="px-6 py-3 rounded-md">Learn More</Button>
-            </Link>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default AboutUs;
+export default About;
